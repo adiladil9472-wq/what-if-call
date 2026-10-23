@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What If I Call ♡</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: white;
+  background:
+    radial-gradient(circle at 50% 20%, #59416f, transparent 50%),
+    linear-gradient(135deg, #080811, #24152e, #080811);
+  overflow: hidden;
+}
+
+.card {
+  width: 90%;
+  max-width: 600px;
+  padding: 25px;
+}
+
+h1 {
+  font-size: 24px;
+  letter-spacing: 4px;
+  color: #e6ceff;
+}
+
+.subtitle {
+  color: #b9a7ca;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+#lyric {
+  min-height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  line-height: 1.6;
+  font-weight: bold;
+  text-shadow: 0 0 20px #cda5ff;
+  transition: opacity 0.7s ease;
+}
+
+.fade {
+  opacity: 0;
+}
+
+button {
+  padding: 13px 27px;
+  border: 1px solid #d7b8ff;
+  border-radius: 30px;
+  background: #d7b8ff;
+  color: #20152c;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: 30px;
+  color: #b9a7ca;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <p class="subtitle">A LITTLE PIECE OF MUSIC</p>
+  <h1>WHAT IF I CALL</h1>
+
+  <div id="lyric">Somewhere in the night ✦</div>
+
+  <button id="play">▶️ Mulai Lirik</button>
+
+  <div class="footer">made for your favorite song ♡</div>
+</div>
+
+<script>
+const lines = [
+  ["Ganti dengan baris lirik pertama", 3000],
+  ["Ganti dengan baris lirik kedua", 3000],
+  ["Ganti dengan baris lirik ketiga", 4000],
+  ["Ganti dengan baris lirik keempat", 3000],
+  ["end", 3000]
+];
+
+const lyric = document.getElementById("lyric");
+const play = document.getElementById("play");
+
+let index = 0;
+let timer;
+
+function showLine() {
+  lyric.classList.add("fade");
+
+  timer = setTimeout(() => {
+    if (lines[index][0] === "end") {
+      lyric.textContent = "Thank you for listening ♡";
+      lyric.classList.remove("fade");
+      play.disabled = false;
+      play.textContent = "↻ Ulangi";
+      return;
+    }
+
+    lyric.textContent = lines[index][0];
+    lyric.classList.remove("fade");
+
+    const delay = lines[index][1];
+    index++;
+
+    timer = setTimeout(showLine, delay);
+  }, 700);
+}
+
+play.addEventListener("click", () => {
+  clearTimeout(timer);
+  index = 0;
+  play.disabled = true;
+  play.textContent = "Lirik berjalan...";
+  showLine();
+});
+</script>
+</body>
+</html>
