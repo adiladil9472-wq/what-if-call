@@ -81,12 +81,23 @@ button {
 <div class="card">
   <p class="subtitle">A LITTLE PIECE OF MUSIC</p>
   <h1>WHAT IF I CALL</h1>
-
+  <div id="lyric"></div>
   <button id="play">▶️ Mulai Lirik</button>
 
 </div>
 
 <script>
+  const lyricText = "Aku ingin menyampaikan sesuatu untukmu...";
+const lyricElement = document.getElementById("lyric");
+
+let i = 0;
+
+function typeLyric() {
+  if (i < lyricText.length) {
+    lyricElement.textContent += lyricText.charAt(i);
+    i++;
+    setTimeout(typeLyric, 100);
+  }
 const lines = [
   ["You Know It's true", 4000],
   ["yeah i miss you", 4000],
